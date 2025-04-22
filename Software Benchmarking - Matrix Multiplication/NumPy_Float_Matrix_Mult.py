@@ -25,7 +25,7 @@ data = {
 }
 
 df = pd.DataFrame(data)
-excel_path = r"C:\Prabhav\Prabhav HP\Prabhav Projects & Courses\Hardware-Accelerator-for-FFT\Software Benchmarking - Matrix Multiplication\float_matrix_mult.xlsx"
+excel_path = r"C:\Prabhav\Prabhav HP\Prabhav Projects & Courses\Hardware-Accelerator-for-FFT\Software Benchmarking - Matrix Multiplication\numpy_float_matrix_mult.xlsx"
 
 with pd.ExcelWriter(excel_path, engine='xlsxwriter') as writer:
     df.to_excel(writer, index=False, sheet_name='MatrixMultTiming')
