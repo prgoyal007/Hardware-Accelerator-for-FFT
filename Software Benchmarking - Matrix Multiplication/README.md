@@ -1,5 +1,5 @@
 # Software Benchmarking - Matrix Multiplication
-Purpose and Objective: 
+# Purpose and Objective
 The primary goal of this phase was to establish baseline performance metrics for matrix multiplication on the CPU and GPU. Since matrix multiplication is a fundamental operation in many computational tasks—including FFT and other signal processing workloads—understanding its behavior in both software and hardware contexts is critical. This benchmarking serves as a reference point for evaluating the potential speedups and efficiency gains offered by a hardware accelerator later in the project.
 
 Specifically, this phase explores how execution time varies:
@@ -9,7 +9,7 @@ Specifically, this phase explores how execution time varies:
 
 These comparisons help highlight the computational trade-offs involved in data representation and hardware utilization.
 
-Structure of the Python Files:
+# Structure of the Python Files
 To isolate and analyze each of these variables independently, the benchmarking was divided across four separate Python scripts:
 NumPy_Int_Matrix_Mult.py    -    Performs matrix multiplication on the CPU using NumPy with integer matrices.
 NumPy_Float_Matrix_Mult.py    -    Performs matrix multiplication on the CPU using NumPy with floating-point matrices.
@@ -18,7 +18,7 @@ CuPy_Float_Matrix_Mult.py    -    Performs matrix multiplication on the GPU usin
 
 Separating the tests ensures clarity, modularity, and reproducibility, and allows each result set to be evaluated and graphed independently.
 
-Comparison of NumPy vs CuPy (CPU vs GPU): 
+# Comparison of NumPy vs CuPy (CPU vs GPU)
 By comparing NumPy (which executes operations on the CPU) and CuPy (which uses the GPU), the benchmarking illustrates the performance differential between general-purpose processors and specialized hardware. The key goals were:
 - To quantify the acceleration factor offered by GPU computing.
 - To determine how GPU performance scales with matrix size.
@@ -26,7 +26,7 @@ By comparing NumPy (which executes operations on the CPU) and CuPy (which uses t
 
 This comparison is particularly relevant when transitioning to hardware acceleration, as it gives context on whether a custom-designed accelerator is likely to compete with GPU performance.
 
-Comparison of Integer vs Floating-Point Operations: 
+# Comparison of Integer vs Floating-Point Operations 
 Integer and floating-point operations differ in terms of:
 - Computation complexity
 - Hardware resource requirements
@@ -39,7 +39,7 @@ This benchmarking phase investigates whether:
 
 These results inform decisions about whether the hardware FFT implementation should target integer or fixed-point arithmetic instead of full floating-point logic, which can be more costly in hardware.
 
-Graph and Table Outputs: 
+# Graph and Table Outputs
 Each Python script outputs:
 - A table showing execution times (in seconds or milliseconds) for various matrix sizes (e.g., 512×512, 1024×1024, 2048×2048).
 - A graph (line plot or bar chart) comparing runtime as matrix size increases.
@@ -48,7 +48,7 @@ Each Python script outputs:
 - Whether the GPU advantage grows with matrix size,
 - How integer vs floating-point operations impact performance over scale.
 
-Summary of Insights
+# Summary of Insights
 - GPU (CuPy) significantly outperforms CPU (NumPy) at large matrix sizes, particularly for floating-point operations.
 - Integer operations are typically faster than floating-point on both platforms, but floating-point is essential for many signal processing tasks, including FFT.
 - The trade-off between speed and numerical precision is a key consideration for hardware design.
