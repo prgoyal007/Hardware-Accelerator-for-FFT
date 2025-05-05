@@ -1,4 +1,4 @@
-# Software Benchmarking - Matrix Multiplication
+# Phase 1: Software Benchmarking - Matrix Multiplication
 # Purpose and Objective
 The primary goal of this phase was to establish baseline performance metrics for matrix multiplication on the CPU and GPU. Since matrix multiplication is a fundamental operation in many computational tasks—including FFT and other signal processing workloads—understanding its behavior in both software and hardware contexts is critical. This benchmarking serves as a reference point for evaluating the potential speedups and efficiency gains offered by a hardware accelerator later in the project.
 
