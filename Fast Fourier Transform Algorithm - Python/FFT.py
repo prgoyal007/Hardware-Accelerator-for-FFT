@@ -1,91 +1,36 @@
-import math
-"""
-C++ Code for FFT
+# FFT.py
+import cmath
+import numpy as np
 
-vector<complex<double>> FFT(vector<complex<double>> &samples) {
+"""Compute the discrete Fourier transform of list `samples` via Cooley–Tuk recursion."""
+def FFT(samples):
+    # Find the number of samples we have
+    # FFT only works efficiently when n is a power of two
+    n = len(samples)
 
-    // Find the number of samples we have
-    int N = samples.size();
-
-    // Execute the end of the recursive even/odd splits once we only have one sample
-    if (N == 1) {
-        return samples;
-    }
-
-    // Split the samples into even and odd subsums. Find half the total number of samples.
-    int M = N / 2;
-
-    // Declare an even and an odd complex vector
-    vector<complex<double>> Xeven(M, 0);
-    vector<complex<double>> Xodd(M, 0);
-
-    // Input the even and odd samples into respective vectors
-    for (int i=0; i != M; i++){
-        Xeven[i] = samples[2*i];
-        Xodd[i] = samples[2*i + 1];
-    }
-
-    // Perform the recursive FFT operation on the odd and even sides
-    vector<complex<double>> Feven(M, 0);
-    Feven = FFT(Xeven);
-    vector<complex<double>> Fodd(M, 0);
-    Fodd = FFT(Xodd);
-
-    /*----------------- END RECURSION --------------------- */
-    // Declare vector of frequency bins
-    vector<complex<double>> freqbins(N, 0);
-
-    // Combine the values found
-    for (int k = 0; k != N/2; k++) {
-        // For each split set, we need to multiply a k-dependent complex
-        // number by the odd subsum
-        complex<double> cmplx_exp = polar(1.0, -2*pi*k/N) * Fodd[k];
-        freqbins[k] = Feven[k] + cmplx_exp;
-
-        //Everytime you add pi, exponential changes sign
-        freqbins[k+N/2] = Feven[k] - cmplx_exp;
-    }
-
-return freqbins;
-}
-
-
-"""
-'''
-def FFT(p):
-    n = len(p) # n is a power of 2
+    # Execute the end of the recursive even/odd splits once we only have one sample
+    # If n == 1, the DFT of a single point is just the point itself
     if n == 1:
-        return p
+        return samples[:]      # Return a copy
     
-    for i in n:
-        w = math.e^((2 * math.pi * i) / n)
-        P_e, P_o = [], []
-        y_e, y_o = FFT(P_e), FFT(P_o)
+    # Split the samples into even and odd subsums. Find half the total number of samples.
+    m = n // 2
+    x_even = [samples[2*i] for i in range(m)]
+    x_odd = [samples[2*i + 1] for i in range(m)]
 
-    for j in range(n/2):
-        y[j] = y_e[j] + (w^j * y_o[j])
-        y[j + n/2] = y_e[j] - (w^j * y_o[j])
+    # Perform the recursive FFT operation on the odd and even sides 
+    # Each returns a list of length m representing the DFTs of the even- and odd-subsequences.   
+    f_even  = FFT(x_even)
+    f_odd   = FFT(x_odd)
 
-    return y
-'''
+    # Combine the values found
+    result = [0] * n
 
-'''
-def FFT(p):
-    # P - [p_0, p_1, ..., p_n-1] coeff representation 
-    n = len(p)  # n is a power of 2
-    if n == 1:
-        return p
-    
-    w = e^((2* pi * i) / n)
-
-    P_e, P_o = [p_0, p_2, ..., p_n-2], [p_1, p_3, ..., p_n-1]
-    y_e, y_o = FFT(P_e), FFT(P_o)
-
-    y = [0] * n
-
-    for j in range(n/2):
-        y[j] = y_e[j] + (w^j * y_o[j])
-        y[j + n/2] = y_e[j] - (w^j * y_o[j])
-
-    return y
-'''
+    for k in range(m):
+        # For each split set, we need to multiple a k-dependent complex number by the odd subsum
+        # Compute the "twiddle factor", then assemble the full transform of the length n
+        W_nk                = cmath.exp(-2j * cmath.pi * k / n)
+        result[k]           = f_even[k] + (W_nk * f_odd[k])
+        result[k + m]       = f_even[k] - (W_nk * f_odd[k])
+        
+    return result
