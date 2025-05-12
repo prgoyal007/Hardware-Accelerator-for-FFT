@@ -41,7 +41,7 @@ These results inform decisions about whether the hardware FFT implementation sho
 
 # Graph and Table Outputs
 Each Python script outputs:
-- A table showing execution times (in seconds or milliseconds) for various matrix sizes (e.g., 512×512, 1024×1024, 2048×2048).
+- A table showing execution times (in seconds or milliseconds) for various matrix sizes.
 - A graph (line plot or bar chart) comparing runtime as matrix size increases.
 - These visualizations provide a clear representation of scalability, showing:
 - How well each platform handles increasing computational load,
