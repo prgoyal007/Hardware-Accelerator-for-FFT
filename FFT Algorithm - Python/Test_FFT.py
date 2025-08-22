@@ -1,5 +1,7 @@
 # Test_FFT.py
 '''
+To Test Functionality of Custom FFT vs NumPy's FFT:
+
 RUN in Terminal @current directory: 
 python -m pytest -q        
 '''
