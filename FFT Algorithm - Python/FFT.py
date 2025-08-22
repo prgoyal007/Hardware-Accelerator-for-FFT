@@ -1,8 +1,10 @@
 # FFT.py
 import cmath
-import numpy as np
 
-"""Compute the discrete Fourier transform of list `samples` via Cooley–Tuk recursion."""
+'''
+Compute the discrete Fourier transform of list `samples` via Cooley–Tuk recursion.
+'''
+
 def FFT(samples):
     # Find the number of samples we have
     # FFT only works efficiently when n is a power of two
